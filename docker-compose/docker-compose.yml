@@ -1,0 +1,18 @@
+version: '3.8'
+services:
+  app:
+    container_name: backgammon
+    image: backgammon
+    build: ../
+    ports:
+      - "8080:8080"
+    depends_on:
+      - postgresqldb
+  postgresqldb:
+    image: postgres
+    ports:
+      - "5432:5432"
+    environment:
+      - POSTGRES_PASSWORD=123qwe
+      - POSTGRES_USER=db_user
+      - POSTGRES_DB=backgammon

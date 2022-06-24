@@ -1,0 +1,22 @@
+spring:
+  profiles:
+    active: dev
+
+
+  datasource:
+    url: jdbc:postgresql://localhost:5432/backgammon
+    username: db_user
+    password: 123qwe
+
+  jpa:
+    hibernate:
+      ddl-auto: create
+
+backgammon:
+  app:
+    jwtExpirationMs: '3600000'
+    jwtRefreshExpirationMs: '86400000'
+    jwtSecret: backGammonSecretKey54
+
+server:
+  port: 8081
