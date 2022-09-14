@@ -1,4 +1,4 @@
-package com.backgammon.v1.auth;
+package com.backgammon.v1.auth.model;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

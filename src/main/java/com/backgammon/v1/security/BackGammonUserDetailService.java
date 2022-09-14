@@ -1,5 +1,6 @@
-package com.backgammon.v1.security.jwt;
+package com.backgammon.v1.security;
 
+import com.backgammon.v1.security.BackGammonUserDetails;
 import com.backgammon.v1.user.UserRepository;
 import com.backgammon.v1.user.model.User;
 import lombok.RequiredArgsConstructor;

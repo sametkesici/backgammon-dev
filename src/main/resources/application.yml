@@ -1,8 +1,6 @@
+
+
 spring:
-  profiles:
-    active: dev
-
-
   datasource:
     url: jdbc:postgresql://localhost:5432/backgammon
     username: db_user
@@ -10,13 +8,18 @@ spring:
 
   jpa:
     hibernate:
-      ddl-auto: create
+      ddl-auto: update
 
 backgammon:
   app:
-    jwtExpirationMs: '3600000'
-    jwtRefreshExpirationMs: '86400000'
-    jwtSecret: backGammonSecretKey54
+    jwtExpirationMs: '1000000000'
+    jwtCookieName: 'jwt-cookie'
+    jwtSecret: back-gammon-socket-game
 
 server:
   port: 8081
+
+rt-server:
+  port: '9092'
+  host: localhost
+

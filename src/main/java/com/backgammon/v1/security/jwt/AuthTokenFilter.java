@@ -1,5 +1,6 @@
 package com.backgammon.v1.security.jwt;
 
+import com.backgammon.v1.security.BackGammonUserDetailService;
 import java.io.IOException;
 import javax.servlet.FilterChain;
 import javax.servlet.ServletException;
@@ -47,12 +48,6 @@ public class AuthTokenFilter extends OncePerRequestFilter {
   }
 
   private String parseJwt(HttpServletRequest request) {
-    String headerAuth = request.getHeader("Authorization");
-
-    if (StringUtils.hasText(headerAuth) && headerAuth.startsWith("Bearer ")) {
-      return headerAuth.substring(7, headerAuth.length());
-    }
-
-    return null;
+    return jwtUtils.getJwtFromCookies(request);
   }
 }

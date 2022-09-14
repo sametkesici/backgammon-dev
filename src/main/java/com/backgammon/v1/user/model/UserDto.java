@@ -10,6 +10,8 @@ import lombok.Setter;
 @Builder
 public class UserDto {
 
+  private Long id;
+
   private String userName;
 
   private Set<Role> roles;

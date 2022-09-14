@@ -1,10 +1,8 @@
-package com.backgammon.v1.security.jwt;
+package com.backgammon.v1.security;
 
 import com.backgammon.v1.user.model.User;
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import java.util.ArrayList;
 import java.util.Collection;
-import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 import lombok.AllArgsConstructor;

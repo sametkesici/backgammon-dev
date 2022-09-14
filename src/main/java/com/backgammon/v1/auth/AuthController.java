@@ -1,14 +1,13 @@
 package com.backgammon.v1.auth;
 
-import com.backgammon.v1.security.jwt.JwtResponse;
+import com.backgammon.v1.auth.model.LoginRequestDto;
+import com.backgammon.v1.auth.model.LoginResponseDto;
+import com.backgammon.v1.auth.model.UserInfo;
 import com.backgammon.v1.security.jwt.JwtUtils;
-import com.backgammon.v1.security.jwt.RefreshToken;
-import com.backgammon.v1.security.jwt.RefreshTokenService;
-import com.backgammon.v1.security.jwt.TokenRefreshException;
 import javax.validation.Valid;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -21,32 +20,20 @@ public class AuthController {
 
   private final AuthService authService;
 
-  private final RefreshTokenService refreshTokenService;
-
-  private final JwtUtils jwtUtils;
-
   @PostMapping("/signin")
-  public ResponseEntity<JwtResponse> authenticateUser(@Valid @RequestBody LoginRequestDto loginRequestDto) {
-    JwtResponse jwtResponse = authService.authenticateUser(loginRequestDto);
-    return ResponseEntity.ok(jwtResponse);
+  public ResponseEntity<LoginResponseDto> authenticateUser(@Valid @RequestBody LoginRequestDto loginRequestDto) {
+    UserInfo userInfo = authService.authenticateUser(loginRequestDto);
+
+    LoginResponseDto loginResponseDto = LoginResponseDto.builder().id(userInfo.getId()).username(userInfo.getUsername()).email(
+        userInfo.getEmail()).roles(userInfo.getRoles()).build();
+
+    return ResponseEntity.ok().header(HttpHeaders.SET_COOKIE, userInfo.getJwtCookie()).body(loginResponseDto);
   }
 
-  @PostMapping("/logout")
-  public ResponseEntity<String> logOutUser(@Valid @RequestBody LogOutRequestDto logOutRequestDto){
-    refreshTokenService.deleteByUserId(logOutRequestDto.getUserId());
-    return ResponseEntity.ok("Log out Succesful!");
-  }
-
-  @PostMapping("/refresh-token")
-  public ResponseEntity<TokenRefreshResponse> refreshToken(@Valid @RequestBody TokenRefreshRequestDto request){
-    return refreshTokenService.findByToken(request.getRefreshToken())
-                              .map(refreshTokenService::verifyExpiration)
-                              .map(RefreshToken::getUser)
-                              .map(user -> {
-                                String token = jwtUtils.generateTokenFromUsername(user.getUserName());
-                                return ResponseEntity.ok(new TokenRefreshResponse(token,request.getRefreshToken(),"Bearer"));
-                              })
-                              .orElseThrow(() -> new TokenRefreshException("Refresh token is not in database!"));
+  @PostMapping("/signout")
+  public ResponseEntity<String> logoutUser(){
+    return ResponseEntity.ok().header(HttpHeaders.SET_COOKIE, authService.clearJWTCookie())
+                         .body("You've been signed out!");
   }
 
 }
