@@ -8,6 +8,9 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RequestPart;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 @RequiredArgsConstructor
@@ -20,9 +23,9 @@ public class GameController {
   private final GameRepository gameRepository;
 
   @GetMapping("/invite")
-  public ResponseEntity<Void> inviteToGame(@RequestBody InviteGameRequestDto inviteGameRequestDto) {
-    gameService.inviteToGame(inviteGameRequestDto);
-    return ResponseEntity.ok().build();
+  public ResponseEntity<String> inviteToGame(@RequestParam String opponentUser) {
+    String url = gameService.inviteToGame(opponentUser);
+    return ResponseEntity.ok(url);
   }
 
   @PostMapping("/reply-game-invite")

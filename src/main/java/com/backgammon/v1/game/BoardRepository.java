@@ -1,0 +1,6 @@
+package com.backgammon.v1.game;
+
+import com.backgammon.v1.game.model.Board;
+import org.springframework.data.jpa.repository.JpaRepository;
+
+public interface BoardRepository extends JpaRepository<Board,Long> {}

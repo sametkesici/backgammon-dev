@@ -7,15 +7,17 @@ import com.backgammon.v1.base.BaseEntity;
 import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.Entity;
+import javax.persistence.OneToMany;
 import lombok.Data;
 
 @Entity
 @Data
 public class Board extends BaseEntity {
 
-  public Board(){
+  @OneToMany
+  private List<Spot> spots;
 
-    List<Spot> spots;
+  public Board(){
 
     spots = new ArrayList<>(28);
 

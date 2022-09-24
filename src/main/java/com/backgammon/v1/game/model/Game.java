@@ -5,8 +5,11 @@ import com.backgammon.v1.user.model.User;
 import java.util.List;
 import java.util.Set;
 import java.util.UUID;
+import javax.annotation.PostConstruct;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -40,13 +43,14 @@ public class Game extends BaseEntity {
   @OneToOne
   private User currentTurn;
 
+  @Enumerated(EnumType.STRING)
   private GameStatus gameStatus;
 
   @OneToMany
   private List<Move> movesPlayed;
 
   //when bearingoff is true collect checkers
-  private boolean bearingOff;
+  private boolean bearingOff = false;
 
   @Column(nullable = false)
   private String url = UUID.randomUUID().toString();
