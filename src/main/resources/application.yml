@@ -2,13 +2,17 @@
 
 spring:
   datasource:
-    url: jdbc:postgresql://localhost:5432/backgammon
+    url: jdbc:postgresql://localhost:5433/backgammon
     username: db_user
     password: 123qwe
+
 
   jpa:
     hibernate:
       ddl-auto: update
+
+  application:
+    name: backgammon
 
 backgammon:
   app:
@@ -22,4 +26,3 @@ server:
 rt-server:
   port: '9092'
   host: localhost
-

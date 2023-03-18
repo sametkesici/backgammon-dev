@@ -5,11 +5,9 @@ import com.backgammon.v1.game.exception.PendingGameNotFoundException;
 import com.backgammon.v1.game.model.Board;
 import com.backgammon.v1.game.model.Game;
 import com.backgammon.v1.game.model.GameStatus;
-import com.backgammon.v1.game.model.request.InviteGameRequestDto;
 import com.backgammon.v1.game.model.request.ReplyGameInviteRequest;
 import com.backgammon.v1.user.UserService;
 import com.backgammon.v1.user.model.User;
-import java.util.logging.Logger;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -68,4 +66,6 @@ public class GameService {
 
     return gameRepository.save(game);
   }
+
+
 }

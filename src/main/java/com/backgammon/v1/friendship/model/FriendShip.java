@@ -2,19 +2,9 @@ package com.backgammon.v1.friendship.model;
 
 import com.backgammon.v1.base.BaseEntity;
 import com.backgammon.v1.user.model.User;
-import javax.persistence.Entity;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
-import javax.persistence.FetchType;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.Table;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.*;
+
+import javax.persistence.*;
 
 @Entity
 @Table(name = "friendships")
@@ -41,5 +31,6 @@ public class FriendShip extends BaseEntity {
 
   @Enumerated(EnumType.STRING)
   private FriendShipStatus status;
+
 
 }
