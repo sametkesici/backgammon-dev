@@ -2,10 +2,9 @@
 
 spring:
   datasource:
-    url: jdbc:postgresql://localhost:5433/backgammon
+    url: jdbc:postgresql://localhost:5432/backgammon
     username: db_user
     password: 123qwe
-
 
   jpa:
     hibernate:
@@ -13,6 +12,15 @@ spring:
 
   application:
     name: backgammon
+
+google:
+  client:
+    clientId: <Google OAuth 2.0 Client ID>
+    clientSecret: <Google OAuth 2.0 Client Secret>
+    redirectUri: <Google OAuth 2.0 Authorized redirect URIs>
+  auth:
+    tokenServerUrl: https://oauth2.googleapis.com/token
+    authorizationServerUrl: https://accounts.google.com/o/oauth2/v2/auth
 
 backgammon:
   app:
@@ -26,3 +34,4 @@ server:
 rt-server:
   port: '9092'
   host: localhost
+
